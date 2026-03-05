@@ -46,16 +46,43 @@ FROM [PCdata_db].[dbo].[1772542271737_pc_data]
 -- INTERMEDIATE QUESTIONS
 
 -- 11. Calculate total revenue (SUM of Sale Price).
+Select Sum(sale_price) as TotalRevenue
+from  [PCdata_db].[dbo].[1772542271737_pc_data]
 -- 12. Calculate total profit (SUM of Sale Price - Cost Price).
+Select Sum(sale_price-Cost_Price) as  Total_profit
+from  [PCdata_db].[dbo].[1772542271737_pc_data]
 -- 13. Find the average Discount Amount.
+select AVG(Discount_Amount) as Discount_Amount
+from [PCdata_db].[dbo].[1772542271737_pc_data]
 -- 14. Calculate total Finance Amount issued.
+SELECT SUM(cast (Finance_Amount as bigint)) as Total_Finance_Amount
+from  [PCdata_db].[dbo].[1772542271737_pc_data]
 -- 15. Find total revenue per PC Make.
+SELECT SUM(Sale_Price)  AS Total_revenue_PC_Make,PC_Make
+from  [PCdata_db].[dbo].[1772542271737_pc_data]
+group by PC_Make
 -- 16. Find average Sale Price per Storage Type.
--- 17. Calculate total revenue per Shop Name.
--- 18. Calculate total revenue per Sales Person Name.
--- 19. Find average Credit Score per Payment Method.
--- 20. Calculate total Cost of Repairs per Sales Person Department.
+SELECT AVG(Sale_Price) as Average_Sale_Price ,Storage_Type
+from  [PCdata_db].[dbo].[1772542271737_pc_data]
+group by Storage_Type
 
+-- 17. Calculate total revenue per Shop Name.
+SELECT SUM(Sale_Price) as Total_revenue_per_Shop_Name,Shop_name
+from  [PCdata_db].[dbo].[1772542271737_pc_data]
+group by Shop_name
+
+-- 18. Calculate total revenue per Sales Person Name.
+SELECT SUM(Sale_Price) as Total_revenue_per_Sales_Person_Name,Shop_name
+from  [PCdata_db].[dbo].[1772542271737_pc_data]
+group by Shop_name
+-- 19. Find average Credit Score per Payment Method.
+SELECT AVG(Credit_Score) as Average_Credit_Score_per_Payment_Method,Payment_Method
+from  [PCdata_db].[dbo].[1772542271737_pc_data]
+group by Payment_Method
+-- 20. Calculate total Cost of Repairs per Sales Person Department.
+SELECT SUM(cast(Cost_of_Repairs as bigint)) as total_Cost_of_Repairs_per_Sales_PersonDepaertment,Sales_Person_Department
+from  [PCdata_db].[dbo].[1772542271737_pc_data]
+group by Sales_Person_Department
 -- ADVANCED QUESTIONS
 
 -- 21. Calculate profit per Shop Name.
